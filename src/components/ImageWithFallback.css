@@ -1,0 +1,129 @@
+/* components/ImageWithFallback.css */
+.image-with-fallback {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.placeholder-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(184, 134, 11, 0.2);
+  border-top: 3px solid var(--gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.placeholder-text {
+  color: var(--gray-medium);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.fallback-image {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.fallback-icon {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+.fallback-text {
+  color: var(--gray-medium);
+  font-size: 0.9rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.image-with-fallback img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.image-with-fallback img.image-loading {
+  opacity: 0;
+}
+
+.image-with-fallback img.image-loaded {
+  opacity: 1;
+}
+
+/* Animações */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.image-with-fallback img {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Variantes de tamanho */
+.image-with-fallback.small .fallback-icon {
+  font-size: 2rem;
+}
+
+.image-with-fallback.large .fallback-icon {
+  font-size: 4rem;
+}
+
+.image-with-fallback.cover img {
+  object-fit: cover;
+}
+
+.image-with-fallback.contain img {
+  object-fit: contain;
+}
+
+/* Estados de hover */
+.image-with-fallback:hover img {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .fallback-icon {
+    font-size: 2.5rem;
+  }
+  
+  .fallback-text {
+    font-size: 0.8rem;
+  }
+}

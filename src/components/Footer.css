@@ -1,0 +1,453 @@
+/* Footer.css - CSS Completo e Moderno */
+
+.footer {
+  position: relative;
+  background: var(--gradient-dark);
+  color: var(--white);
+  padding: 4rem 0 1rem;
+  margin-top: 4rem;
+  overflow: hidden;
+}
+
+.footer__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.footer__pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(184, 134, 11, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+  opacity: 0.3;
+}
+
+.footer__container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer__content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer__section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__brand {
+  gap: 1.5rem;
+}
+
+.footer__brand-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer__brand-description {
+  line-height: 1.6;
+  opacity: 0.9;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.footer__social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-medium);
+  color: var(--white);
+  font-size: 1.2rem;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  transition: var(--transition-smooth);
+}
+
+.footer__social-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.footer__section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--white);
+  position: relative;
+}
+
+.footer__section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--gradient-gold);
+  border-radius: 2px;
+}
+
+.footer__contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.footer__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  transition: var(--transition-smooth);
+}
+
+.footer__contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--gradient-gold);
+  border-radius: var(--radius-small);
+  color: var(--white);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.footer__contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.footer__contact-text {
+  font-weight: 600;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.footer__contact-subtext {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer__link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+.footer__link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.footer__link:hover::before {
+  opacity: 1;
+}
+
+.footer__link:hover {
+  color: var(--gold-light);
+}
+
+.footer__newsletter-text {
+  line-height: 1.5;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.footer__newsletter-form {
+  margin-bottom: 2rem;
+}
+
+.footer__input-group {
+  position: relative;
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-medium);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.footer__input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.footer__input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer__submit-btn {
+  padding: 0.75rem 1rem;
+  background: var(--gradient-gold);
+  border: none;
+  color: var(--white);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__submit-btn:hover {
+  background: var(--gradient-gold-hover);
+}
+
+.footer__payment-methods {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__payment-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  opacity: 0.9;
+}
+
+.footer__payment-icons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.footer__payment-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  filter: grayscale(0.3);
+}
+
+.footer__payment-icon:hover {
+  filter: grayscale(0);
+  transform: translateY(-2px);
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.footer__copyright {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.heart-icon {
+  color: #e74c3c;
+  animation: heartbeat 2s infinite;
+}
+
+.footer__scroll-top {
+  width: 45px;
+  height: 45px;
+  background: var(--gradient-gold);
+  border: none;
+  border-radius: var(--radius-medium);
+  color: var(--white);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__scroll-top:hover {
+  background: var(--gradient-gold-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Animações */
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.footer__social-link {
+  animation: float 3s ease-in-out infinite;
+}
+
+.footer__social-link:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.footer__social-link:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.footer__social-link:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footer__content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem 0 1rem;
+  }
+  
+  .footer__container {
+    padding: 0 1.5rem;
+  }
+  
+  .footer__content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .footer__brand {
+    grid-column: 1;
+    text-align: center;
+  }
+  
+  .footer__social {
+    justify-content: center;
+  }
+  
+  .footer__section-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .footer__bottom {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2.5rem 0 1rem;
+  }
+  
+  .footer__container {
+    padding: 0 1rem;
+  }
+  
+  .footer__brand-title {
+    font-size: 1.75rem;
+  }
+  
+  .footer__input-group {
+    flex-direction: column;
+  }
+  
+  .footer__input {
+    padding: 1rem;
+  }
+  
+  .footer__submit-btn {
+    padding: 0.75rem;
+    border-radius: 0 0 var(--radius-medium) var(--radius-medium);
+  }
+  
+  .footer__payment-icons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .footer__social-link,
+  .heart-icon {
+    animation: none;
+  }
+  
+  .footer__link,
+  .footer__contact-item,
+  .footer__payment-icon {
+    transition: none;
+  }
+}
