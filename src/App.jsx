@@ -7,7 +7,6 @@ import Footer from './components/Footer';
 import Loading from './components/Loading';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
-import Drinks from './pages/Drinks';
 import Desserts from './pages/Desserts';
 import Carrinho from './pages/Carrinho'; 
 import About from './pages/About';
@@ -15,6 +14,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
+import Promocoes from './components/Promocoes';
 
 function AppContent() {
   const location = useLocation();
@@ -45,7 +45,6 @@ function AppContent() {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/cardapio" element={<Menu />} />
-            <Route path="/bebidas" element={<Drinks />} />
             <Route path="/sobremesas" element={<Desserts />} />
             <Route path="/carrinho" element={<Carrinho />} /> 
             <Route path="/sobre" element={<About />} />
@@ -53,6 +52,7 @@ function AppContent() {
             <Route path="/perfil" element={<Profile />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/order-success" element={<OrderSuccess />} />
+            <Route path="/promocoes" element={<Promocoes />} />
           </Routes>
         </AnimatePresence>
       </main>
