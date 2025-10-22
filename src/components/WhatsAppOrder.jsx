@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiX, FiMessageCircle, FiCheck, FiCopy, FiShoppingBag, FiTruck, FiCreditCard, FiDollarSign, FiSmartphone, FiArrowLeft } from 'react-icons/fi';
+import { FiX, FiMessageCircle, FiCheck, FiCopy, FiShoppingBag, FiTruck, FiCreditCard } from 'react-icons/fi';
 import { useCart } from '../context/CartContext';
 import { QRCodeSVG } from 'qrcode.react';
 import './WhatsAppOrder.css';
@@ -10,44 +10,18 @@ const WhatsAppOrder = ({ onClose }) => {
     items, 
     getTotalPrice, 
     observations, 
-    paymentMethod: currentPaymentMethod,
-    updatePaymentMethod,
+    paymentMethod,
     clearCart 
   } = useCart();
 
   const [isCopied, setIsCopied] = useState(false);
   const [isSent, setIsSent] = useState(false);
-  const [showPaymentSelection, setShowPaymentSelection] = useState(false);
 
   const paymentMethods = useMemo(() => ({
-    pix: { 
-      label: 'PIX', 
-      icon: <FiSmartphone />, 
-      color: '#32BCAD',
-      features: ['Pagamento instantâneo', 'Sem taxas', 'QR Code disponível'],
-      instructions: 'Escaneie o QR Code ou use a chave PIX'
-    },
-    credit: { 
-      label: 'Cartão de Crédito', 
-      icon: <FiCreditCard />, 
-      color: '#667eea',
-      features: ['Até 12x sem juros', 'Pagamento seguro', 'Aprovação rápida'],
-      instructions: 'Informe os dados do cartão'
-    },
-    debit: { 
-      label: 'Cartão de Débito', 
-      icon: <FiCreditCard />, 
-      color: '#764ba2',
-      features: ['Pagamento à vista', 'Sem juros', 'Débito em conta'],
-      instructions: 'Informe os dados do cartão'
-    },
-    money: { 
-      label: 'Dinheiro', 
-      icon: <FiDollarSign />, 
-      color: '#FFD700',
-      features: ['Pagamento na entrega', 'Aceitamos troco', 'Sem taxas'],
-      instructions: 'Prepare o valor em dinheiro'
-    }
+    pix: { label: 'PIX', icon: '🏷️', color: '#32BCAD' },
+    credit: { label: 'Cartão de Crédito', icon: '💳', color: '#667eea' },
+    debit: { label: 'Cartão de Débito', icon: '💳', color: '#764ba2' },
+    money: { label: 'Dinheiro', icon: '💵', color: '#FFD700' }
   }), []);
 
   const deliveryFee = 5.00;
@@ -72,7 +46,7 @@ const WhatsAppOrder = ({ onClose }) => {
     message += `*Total: R$ ${totalWithDelivery.toFixed(2)}*%0A%0A`;
     
     message += `*💳 FORMA DE PAGAMENTO:*%0A`;
-    message += `${paymentMethods[currentPaymentMethod].label}%0A%0A`;
+    message += `${paymentMethods[paymentMethod].label}%0A%0A`;
     
     if (observations) {
       message += `*📝 OBSERVAÇÕES:*%0A`;
@@ -87,7 +61,7 @@ const WhatsAppOrder = ({ onClose }) => {
     message += `_*Por favor, confirme seu endereço de entrega no chat*_`;
     
     return `https://wa.me/${phoneNumber}?text=${message}`;
-  }, [items, getTotalPrice, observations, currentPaymentMethod, paymentMethods, totalWithDelivery]);
+  }, [items, getTotalPrice, observations, paymentMethod, paymentMethods, totalWithDelivery]);
 
   const copyToClipboard = async () => {
     const message = decodeURIComponent(generateOrderMessage.replace('https://wa.me/5511999999999?text=', ''));
@@ -109,11 +83,6 @@ const WhatsAppOrder = ({ onClose }) => {
         onClose();
       }, 1000);
     }, 1500);
-  };
-
-  const handlePaymentMethodSelect = (method) => {
-    updatePaymentMethod(method);
-    setShowPaymentSelection(false);
   };
 
   // Variantes de animação
@@ -168,24 +137,6 @@ const WhatsAppOrder = ({ onClose }) => {
         duration: 0.4
       }
     })
-  };
-
-  const paymentMethodVariants = {
-    hidden: { opacity: 0, x: 20 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: {
-        duration: 0.4
-      }
-    },
-    exit: { 
-      opacity: 0, 
-      x: -20,
-      transition: {
-        duration: 0.3
-      }
-    }
   };
 
   return (
@@ -311,43 +262,26 @@ const WhatsAppOrder = ({ onClose }) => {
                     </motion.div>
                   )}
 
-                  {/* Payment Method Selection */}
                   <motion.div 
-                    className="payment-method-selector"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    className="payment-method"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 }}
                   >
-                    <div className="payment-selector-header">
+                    <div className="payment-header">
+                      <span style={{ color: paymentMethods[paymentMethod].color }}>
+                        {paymentMethods[paymentMethod].icon}
+                      </span>
                       <h4>Forma de Pagamento</h4>
-                      <motion.button
-                        className="change-payment-btn"
-                        onClick={() => setShowPaymentSelection(true)}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        Alterar
-                      </motion.button>
                     </div>
-                    
-                    <motion.div 
-                      className="current-payment-method"
-                      style={{ borderLeftColor: paymentMethods[currentPaymentMethod].color }}
-                      whileHover={{ scale: 1.02 }}
-                    >
-                      <div className="current-method-icon" style={{ color: paymentMethods[currentPaymentMethod].color }}>
-                        {paymentMethods[currentPaymentMethod].icon}
-                      </div>
-                      <div className="current-method-info">
-                        <span className="method-name">{paymentMethods[currentPaymentMethod].label}</span>
-                        <span className="method-description">{paymentMethods[currentPaymentMethod].instructions}</span>
-                      </div>
-                    </motion.div>
+                    <p style={{ color: paymentMethods[paymentMethod].color }}>
+                      {paymentMethods[paymentMethod].label}
+                    </p>
                   </motion.div>
                 </div>
 
                 {/* QR Code for PIX */}
-                {currentPaymentMethod === 'pix' && (
+                {paymentMethod === 'pix' && (
                   <motion.div
                     className="pix-section"
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -458,75 +392,6 @@ const WhatsAppOrder = ({ onClose }) => {
                 >
                   Fechar
                 </motion.button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Payment Method Selection Modal */}
-          <AnimatePresence>
-            {showPaymentSelection && (
-              <motion.div
-                className="payment-selection-overlay"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setShowPaymentSelection(false)}
-              >
-                <motion.div
-                  className="payment-selection-modal"
-                  variants={paymentMethodVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="payment-selection-header">
-                    <motion.button
-                      className="back-button"
-                      onClick={() => setShowPaymentSelection(false)}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <FiArrowLeft />
-                    </motion.button>
-                    <h3>Selecionar Pagamento</h3>
-                  </div>
-
-                  <div className="payment-methods-grid">
-                    {Object.entries(paymentMethods).map(([key, method]) => (
-                      <motion.button
-                        key={key}
-                        className={`payment-method-option ${currentPaymentMethod === key ? 'selected' : ''}`}
-                        onClick={() => handlePaymentMethodSelect(key)}
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                        style={{ '--method-color': method.color }}
-                      >
-                        <div className="payment-method-icon" style={{ backgroundColor: method.color }}>
-                          {method.icon}
-                        </div>
-                        <div className="payment-method-info">
-                          <h4>{method.label}</h4>
-                          <p>{method.instructions}</p>
-                        </div>
-                        <div className="payment-features">
-                          {method.features.map((feature, index) => (
-                            <span key={index} className="payment-feature">✓ {feature}</span>
-                          ))}
-                        </div>
-                        {currentPaymentMethod === key && (
-                          <motion.div
-                            className="payment-selection-check"
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                          >
-                            <FiCheck />
-                          </motion.div>
-                        )}
-                      </motion.button>
-                    ))}
-                  </div>
-                </motion.div>
               </motion.div>
             )}
           </AnimatePresence>
